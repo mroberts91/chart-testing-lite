@@ -1,16 +1,15 @@
-name: 'JavaScript Action Template'
-
-description: 'Add description here'
-
+name: "Helm Chart Testing"
+description: "Install the Helm chart-testing tool"
+author: "The Helm authors"
+branding:
+  color: blue
+  icon: anchor
 inputs:
-  input-1:
-    description: 'Add a description here'
-    required: true
-
-outputs:
-  output-1:
-    description: 'Add a description here'
-
+  version:
+    description: "The chart-testing version to install (default: v3.5.0)"
+    default: v3.5.0
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: composite
+  steps:
+    - run: "$GITHUB_ACTION_PATH/ct.sh --version ${{ inputs.version }}"
+      shell: bash
